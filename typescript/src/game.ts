@@ -148,7 +148,7 @@ export class Game {
       
           } else {
       
-            console.log("Answer was correct!!!!");
+            console.log("Answer was corrent!!!!");
       
             this.purses[this.currentPlayer] += 1;
             console.log(this.players[this.currentPlayer] + " now has " +
