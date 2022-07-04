@@ -114,11 +114,19 @@ export class Game {
     console.log(
       this.players[this.currentPlayer] + " was sent to the penalty box"
     );
+
     this.inPenaltyBox[this.currentPlayer] = true;
 
-    this.currentPlayer += 1;
-    if (this.currentPlayer == this.players.length) this.currentPlayer = 0;
+    this.rotateCurrentPlayer();
+
     return true;
+  }
+
+  private rotateCurrentPlayer() {
+    this.currentPlayer += 1;
+    if (this.currentPlayer == this.players.length) {
+      this.currentPlayer = 0;
+    }
   }
 
   public wasCorrectlyAnswered(): boolean {
