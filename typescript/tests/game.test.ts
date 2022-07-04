@@ -1,26 +1,19 @@
-import { expect } from "chai";
-import { describe, it } from "mocha";
 import { GameRunner } from "../src/game-runner";
-import * as readline from "node:readline";
+import { it } from "mocha";
 
-describe("The test environment", () => {
-  it("should pass", () => {
-    expect(true).to.be.true;
-  });
+const chai = require("chai");
+const { jestSnapshotPlugin } = require("mocha-chai-jest-snapshot");
+const { expect } = require("chai");
 
-  it("should access game", function () {
-    expect(GameRunner).to.not.be.undefined;
-  });
+chai.use(jestSnapshotPlugin());
 
-  it("simulates the game", () => {
-    GameRunner.main();
+it("simulates the game", () => {
+  const outputs: string[] = [];
+  global.console.log = (str: string) => {
+    outputs.push(str);
+  };
 
-    const lineReader = require("readline").createInterface({
-      input: require("fs").createReadStream("file.in"),
-    });
+  GameRunner.main();
 
-    lineReader.on("line", function (line) {
-      console.log("Line from file:", line);
-    });
-  });
+  expect(outputs).toMatchSnapshot();
 });
