@@ -145,27 +145,25 @@ export class Game {
         this.rotateCurrentPlayer();
 
         return winner;
-      } else {
-        this.rotateCurrentPlayer();
-        return true;
       }
-    } else {
-      console.log(correctAnswerMessage);
-
-      this.purses[this.currentPlayer] += 1;
-      console.log(
-        this.players[this.currentPlayer] +
-          " now has " +
-          this.purses[this.currentPlayer] +
-          " Gold Coins."
-      );
-
-      var winner = this.didPlayerWin();
-
       this.rotateCurrentPlayer();
-
-      return winner;
+      return true;
     }
+    console.log(correctAnswerMessage);
+
+    this.purses[this.currentPlayer] += 1;
+    console.log(
+      this.players[this.currentPlayer] +
+        " now has " +
+        this.purses[this.currentPlayer] +
+        " Gold Coins."
+    );
+
+    var winner = this.didPlayerWin();
+
+    this.rotateCurrentPlayer();
+
+    return winner;
   }
 }
 
