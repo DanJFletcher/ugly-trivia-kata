@@ -42,27 +42,29 @@ export class Game {
     console.log(this.players[this.currentPlayer] + " is the current player");
     console.log("They have rolled a " + roll);
 
-    if (this.inPenaltyBox[this.currentPlayer]) {
-      if (isOdd(roll)) {
-        this.isGettingOutOfPenaltyBox = true;
-
-        console.log(
-          this.players[this.currentPlayer] +
-            " is getting out of the penalty box"
-        );
-
-        this.movePlayer(roll);
-
-        return;
-      }
-      console.log(
-        this.players[this.currentPlayer] +
-          " is not getting out of the penalty box"
-      );
-      this.isGettingOutOfPenaltyBox = false;
+    if (!this.inPenaltyBox[this.currentPlayer]) {
+      this.movePlayer(roll);
       return;
     }
-    this.movePlayer(roll);
+
+    if (isOdd(roll)) {
+      this.isGettingOutOfPenaltyBox = true;
+
+      console.log(
+        this.players[this.currentPlayer] + " is getting out of the penalty box"
+      );
+
+      this.movePlayer(roll);
+
+      return;
+    }
+
+    console.log(
+      this.players[this.currentPlayer] +
+        " is not getting out of the penalty box"
+    );
+
+    this.isGettingOutOfPenaltyBox = false;
   }
 
   private movePlayer(roll: number) {
