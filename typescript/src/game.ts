@@ -130,40 +130,41 @@ export class Game {
   }
 
   public wasCorrectlyAnswered(): boolean {
-    if (this.inPenaltyBox[this.currentPlayer]) {
-      if (this.isGettingOutOfPenaltyBox) {
-        console.log(correctAnswerMessage);
-        this.purses[this.currentPlayer] += 1;
-        console.log(
-          this.players[this.currentPlayer] +
-            " now has " +
-            this.purses[this.currentPlayer] +
-            " Gold Coins."
-        );
+    if (!this.inPenaltyBox[this.currentPlayer]) {
+      console.log(correctAnswerMessage);
 
-        var winner = this.didPlayerWin();
-        this.rotateCurrentPlayer();
+      this.purses[this.currentPlayer] += 1;
+      console.log(
+        this.players[this.currentPlayer] +
+          " now has " +
+          this.purses[this.currentPlayer] +
+          " Gold Coins."
+      );
 
-        return winner;
-      }
+      var winner = this.didPlayerWin();
+
       this.rotateCurrentPlayer();
-      return true;
+
+      return winner;
     }
-    console.log(correctAnswerMessage);
+    if (this.isGettingOutOfPenaltyBox) {
+      console.log(correctAnswerMessage);
+      this.purses[this.currentPlayer] += 1;
+      console.log(
+        this.players[this.currentPlayer] +
+          " now has " +
+          this.purses[this.currentPlayer] +
+          " Gold Coins."
+      );
 
-    this.purses[this.currentPlayer] += 1;
-    console.log(
-      this.players[this.currentPlayer] +
-        " now has " +
-        this.purses[this.currentPlayer] +
-        " Gold Coins."
-    );
+      var winner = this.didPlayerWin();
+      this.rotateCurrentPlayer();
 
-    var winner = this.didPlayerWin();
+      return winner;
+    }
 
     this.rotateCurrentPlayer();
-
-    return winner;
+    return true;
   }
 }
 
