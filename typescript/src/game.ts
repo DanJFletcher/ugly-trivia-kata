@@ -64,27 +64,27 @@ export class Game {
         );
         console.log("The category is " + this.currentCategory());
         this.askQuestion();
-      } else {
-        console.log(
-          this.players[this.currentPlayer] +
-            " is not getting out of the penalty box"
-        );
-        this.isGettingOutOfPenaltyBox = false;
+        return;
       }
-    } else {
-      this.places[this.currentPlayer] = this.places[this.currentPlayer] + roll;
-      if (this.places[this.currentPlayer] > 11) {
-        this.places[this.currentPlayer] = this.places[this.currentPlayer] - 12;
-      }
-
       console.log(
         this.players[this.currentPlayer] +
-          "'s new location is " +
-          this.places[this.currentPlayer]
+          " is not getting out of the penalty box"
       );
-      console.log("The category is " + this.currentCategory());
-      this.askQuestion();
+      this.isGettingOutOfPenaltyBox = false;
+      return;
     }
+    this.places[this.currentPlayer] = this.places[this.currentPlayer] + roll;
+    if (this.places[this.currentPlayer] > 11) {
+      this.places[this.currentPlayer] = this.places[this.currentPlayer] - 12;
+    }
+
+    console.log(
+      this.players[this.currentPlayer] +
+        "'s new location is " +
+        this.places[this.currentPlayer]
+    );
+    console.log("The category is " + this.currentCategory());
+    this.askQuestion();
   }
 
   private askQuestion(): void {
