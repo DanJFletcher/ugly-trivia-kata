@@ -142,13 +142,11 @@ export class Game {
         );
 
         var winner = this.didPlayerWin();
-        this.currentPlayer += 1;
-        if (this.currentPlayer == this.players.length) this.currentPlayer = 0;
+        this.rotateCurrentPlayer();
 
         return winner;
       } else {
-        this.currentPlayer += 1;
-        if (this.currentPlayer == this.players.length) this.currentPlayer = 0;
+        this.rotateCurrentPlayer();
         return true;
       }
     } else {
@@ -164,8 +162,7 @@ export class Game {
 
       var winner = this.didPlayerWin();
 
-      this.currentPlayer += 1;
-      if (this.currentPlayer == this.players.length) this.currentPlayer = 0;
+      this.rotateCurrentPlayer();
 
       return winner;
     }
