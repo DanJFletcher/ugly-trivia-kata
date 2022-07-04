@@ -1,3 +1,5 @@
+const correctAnswerMessage = "Answer was correct!!!!";
+
 export class Game {
   private players: Array<string> = [];
   private places: Array<number> = [];
@@ -127,7 +129,7 @@ export class Game {
   public wasCorrectlyAnswered(): boolean {
     if (this.inPenaltyBox[this.currentPlayer]) {
       if (this.isGettingOutOfPenaltyBox) {
-        console.log("Answer was correct!!!!");
+        console.log(correctAnswerMessage);
         this.purses[this.currentPlayer] += 1;
         console.log(
           this.players[this.currentPlayer] +
@@ -147,7 +149,7 @@ export class Game {
         return true;
       }
     } else {
-      console.log("Answer was corrent!!!!");
+      console.log(correctAnswerMessage);
 
       this.purses[this.currentPlayer] += 1;
       console.log(
