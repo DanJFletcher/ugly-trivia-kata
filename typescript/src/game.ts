@@ -42,6 +42,7 @@ export class Game {
 
     if (!this.inPenaltyBox[this.currentPlayer]) {
       this.rotatePlayer(roll);
+      this.askQuestion();
 
       return;
     }
@@ -54,6 +55,7 @@ export class Game {
       );
 
       this.rotatePlayer(roll);
+      this.askQuestion();
 
       return;
     }
@@ -77,7 +79,6 @@ export class Game {
         this.tiles[this.currentPlayer]
     );
     console.log("The category is " + this.currentCategory());
-    this.askQuestion();
   }
 
   private playerPassedLastTile() {
