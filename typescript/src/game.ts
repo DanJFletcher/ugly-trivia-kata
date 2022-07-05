@@ -56,50 +56,47 @@ export class Game {
     console.log(this.players[this.currentPlayer] + " is the current player");
     console.log("They have rolled a " + roll);
 
-    if (this.inPenaltyBox[this.currentPlayer]) {
-      if (isOdd(roll)) {
-        this.isGettingOutOfPenaltyBox = true;
+    if (!this.inPenaltyBox[this.currentPlayer]) {
+      this.movePlayer(roll);
 
-        console.log(
-          this.players[this.currentPlayer] +
-            " is getting out of the penalty box"
-        );
-        this.setCurrentPlace(this.getCurrentPlace() + roll);
-        if (this.getCurrentPlace() > 11) {
-          this.setCurrentPlace(this.getCurrentPlace() - 12);
-        }
+      this.askQuestion();
+      return;
+    }
 
-        console.log(
-          this.players[this.currentPlayer] +
-            "'s new location is " +
-            this.getCurrentPlace()
-        );
-        console.log("The category is " + this.currentCategory());
-        this.askQuestion();
-      } else {
-        console.log(
-          this.players[this.currentPlayer] +
-            " is not getting out of the penalty box"
-        );
-        this.isGettingOutOfPenaltyBox = false;
-      }
-    } else {
-      this.places[this.currentPlayer] = this.places[this.currentPlayer] + roll;
-      if (this.places[this.currentPlayer] > 11) {
-        this.places[this.currentPlayer] = this.places[this.currentPlayer] - 12;
-      }
+    if (isOdd(roll)) {
+      this.isGettingOutOfPenaltyBox = true;
 
       console.log(
-        this.players[this.currentPlayer] +
-          "'s new location is " +
-          this.places[this.currentPlayer]
+        this.players[this.currentPlayer] + " is getting out of the penalty box"
       );
-      console.log("The category is " + this.currentCategory());
+      this.movePlayer(roll);
+
       this.askQuestion();
+      return;
     }
+    console.log(
+      this.players[this.currentPlayer] +
+        " is not getting out of the penalty box"
+    );
+    this.isGettingOutOfPenaltyBox = false;
+  }
+
+  private movePlayer(roll: number) {
+    this.places[this.currentPlayer] = this.places[this.currentPlayer] + roll;
+    if (this.places[this.currentPlayer] > 11) {
+      this.places[this.currentPlayer] = this.places[this.currentPlayer] - 12;
+    }
+
+    console.log(
+      this.players[this.currentPlayer] +
+        "'s new location is " +
+        this.places[this.currentPlayer]
+    );
   }
 
   private askQuestion(): void {
+    console.log("The category is " + this.currentCategory());
+
     if (this.currentCategory() == this.pop)
       console.log(this.popQuestions.shift());
     if (this.currentCategory() == this.science)
