@@ -128,13 +128,8 @@ export class Game {
     if (this.inPenaltyBox[this.currentPlayer]) {
       if (this.isGettingOutOfPenaltyBox) {
         console.log("Answer was correct!!!!");
-        this.purses[this.currentPlayer] += 1;
-        console.log(
-          this.players[this.currentPlayer] +
-            " now has " +
-            this.purses[this.currentPlayer] +
-            " Gold Coins."
-        );
+
+        this.addToPlayerPurse();
 
         var winner = this.didPlayerWin();
 
@@ -148,13 +143,7 @@ export class Game {
     } else {
       console.log("Answer was corrent!!!!");
 
-      this.purses[this.currentPlayer] += 1;
-      console.log(
-        this.players[this.currentPlayer] +
-          " now has " +
-          this.purses[this.currentPlayer] +
-          " Gold Coins."
-      );
+      this.addToPlayerPurse();
 
       var winner = this.didPlayerWin();
 
@@ -162,6 +151,16 @@ export class Game {
 
       return winner;
     }
+  }
+
+  private addToPlayerPurse() {
+    this.purses[this.currentPlayer] += 1;
+    console.log(
+      this.players[this.currentPlayer] +
+        " now has " +
+        this.purses[this.currentPlayer] +
+        " Gold Coins."
+    );
   }
 
   private rotatePlayer() {
