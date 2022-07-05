@@ -144,13 +144,7 @@ export class Game {
 
     if (this.isGettingOutOfPenaltyBox) {
       console.log(correctAnswerMessage);
-      this.purses[this.currentPlayer] += 1;
-      console.log(
-        this.players[this.currentPlayer] +
-          " now has " +
-          this.purses[this.currentPlayer] +
-          " Gold Coins."
-      );
+      this.rewardPlayerPoint();
 
       var winner = this.didPlayerWin();
       this.rotateCurrentPlayer();
