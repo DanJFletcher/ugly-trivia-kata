@@ -1,6 +1,6 @@
 export class Game {
   private players: Array<string> = [];
-  private places: Array<number> = [];
+  private tiles: Array<number> = [];
   private purses: Array<number> = [];
   private inPenaltyBox: Array<boolean> = [];
   private currentPlayer: number = 0;
@@ -22,7 +22,7 @@ export class Game {
 
   public add(name: string): boolean {
     this.players.push(name);
-    this.places[this.howManyPlayers()] = 0;
+    this.tiles[this.howManyPlayers()] = 0;
     this.purses[this.howManyPlayers()] = 0;
     this.inPenaltyBox[this.howManyPlayers()] = false;
 
@@ -66,15 +66,15 @@ export class Game {
   }
 
   private rotatePlayer(roll: number) {
-    this.places[this.currentPlayer] = this.places[this.currentPlayer] + roll;
-    if (this.places[this.currentPlayer] > 11) {
-      this.places[this.currentPlayer] = this.places[this.currentPlayer] - 12;
+    this.tiles[this.currentPlayer] = this.tiles[this.currentPlayer] + roll;
+    if (this.tiles[this.currentPlayer] > 11) {
+      this.tiles[this.currentPlayer] = this.tiles[this.currentPlayer] - 12;
     }
 
     console.log(
       this.players[this.currentPlayer] +
         "'s new location is " +
-        this.places[this.currentPlayer]
+        this.tiles[this.currentPlayer]
     );
     console.log("The category is " + this.currentCategory());
     this.askQuestion();
@@ -91,15 +91,15 @@ export class Game {
   }
 
   private currentCategory(): string {
-    if (this.places[this.currentPlayer] == 0) return "Pop";
-    if (this.places[this.currentPlayer] == 4) return "Pop";
-    if (this.places[this.currentPlayer] == 8) return "Pop";
-    if (this.places[this.currentPlayer] == 1) return "Science";
-    if (this.places[this.currentPlayer] == 5) return "Science";
-    if (this.places[this.currentPlayer] == 9) return "Science";
-    if (this.places[this.currentPlayer] == 2) return "Sports";
-    if (this.places[this.currentPlayer] == 6) return "Sports";
-    if (this.places[this.currentPlayer] == 10) return "Sports";
+    if (this.tiles[this.currentPlayer] == 0) return "Pop";
+    if (this.tiles[this.currentPlayer] == 4) return "Pop";
+    if (this.tiles[this.currentPlayer] == 8) return "Pop";
+    if (this.tiles[this.currentPlayer] == 1) return "Science";
+    if (this.tiles[this.currentPlayer] == 5) return "Science";
+    if (this.tiles[this.currentPlayer] == 9) return "Science";
+    if (this.tiles[this.currentPlayer] == 2) return "Sports";
+    if (this.tiles[this.currentPlayer] == 6) return "Sports";
+    if (this.tiles[this.currentPlayer] == 10) return "Sports";
     return "Rock";
   }
 
