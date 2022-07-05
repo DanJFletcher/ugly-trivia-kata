@@ -41,7 +41,7 @@ export class Game {
     console.log("They have rolled a " + roll);
 
     if (!this.inPenaltyBox[this.currentPlayer]) {
-      this.rotatePlayer(roll);
+      this.movePlayer(roll);
       this.askQuestion();
 
       return;
@@ -54,7 +54,7 @@ export class Game {
         this.players[this.currentPlayer] + " is getting out of the penalty box"
       );
 
-      this.rotatePlayer(roll);
+      this.movePlayer(roll);
       this.askQuestion();
 
       return;
@@ -67,7 +67,7 @@ export class Game {
     this.isGettingOutOfPenaltyBox = false;
   }
 
-  private rotatePlayer(roll: number) {
+  private movePlayer(roll: number) {
     this.tiles[this.currentPlayer] += roll;
     if (this.playerPassedLastTile()) {
       this.tiles[this.currentPlayer] -= 12;
@@ -137,13 +137,12 @@ export class Game {
         );
 
         var winner = this.didPlayerWin();
-        this.currentPlayer += 1;
-        if (this.currentPlayer == this.players.length) this.currentPlayer = 0;
+
+        this.rotatePlayer();
 
         return winner;
       } else {
-        this.currentPlayer += 1;
-        if (this.currentPlayer == this.players.length) this.currentPlayer = 0;
+        this.rotatePlayer();
         return true;
       }
     } else {
@@ -159,11 +158,15 @@ export class Game {
 
       var winner = this.didPlayerWin();
 
-      this.currentPlayer += 1;
-      if (this.currentPlayer == this.players.length) this.currentPlayer = 0;
+      this.rotatePlayer();
 
       return winner;
     }
+  }
+
+  private rotatePlayer() {
+    this.currentPlayer += 1;
+    if (this.currentPlayer == this.players.length) this.currentPlayer = 0;
   }
 }
 function isOdd(roll: number) {
