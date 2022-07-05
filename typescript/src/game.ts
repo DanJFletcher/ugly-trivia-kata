@@ -40,49 +40,50 @@ export class Game {
     console.log(this.players[this.currentPlayer] + " is the current player");
     console.log("They have rolled a " + roll);
 
-    if (this.inPenaltyBox[this.currentPlayer]) {
-      if (isOdd(roll)) {
-        this.isGettingOutOfPenaltyBox = true;
-
-        console.log(
-          this.players[this.currentPlayer] +
-            " is getting out of the penalty box"
-        );
-        this.places[this.currentPlayer] =
-          this.places[this.currentPlayer] + roll;
-        if (this.places[this.currentPlayer] > 11) {
-          this.places[this.currentPlayer] =
-            this.places[this.currentPlayer] - 12;
-        }
-
-        console.log(
-          this.players[this.currentPlayer] +
-            "'s new location is " +
-            this.places[this.currentPlayer]
-        );
-        console.log("The category is " + this.currentCategory());
-        this.askQuestion();
-        return;
+    if (!this.inPenaltyBox[this.currentPlayer]) {
+      this.places[this.currentPlayer] = this.places[this.currentPlayer] + roll;
+      if (this.places[this.currentPlayer] > 11) {
+        this.places[this.currentPlayer] = this.places[this.currentPlayer] - 12;
       }
+
       console.log(
         this.players[this.currentPlayer] +
-          " is not getting out of the penalty box"
+          "'s new location is " +
+          this.places[this.currentPlayer]
       );
-      this.isGettingOutOfPenaltyBox = false;
+      console.log("The category is " + this.currentCategory());
+      this.askQuestion();
+
       return;
     }
-    this.places[this.currentPlayer] = this.places[this.currentPlayer] + roll;
-    if (this.places[this.currentPlayer] > 11) {
-      this.places[this.currentPlayer] = this.places[this.currentPlayer] - 12;
-    }
 
+    if (isOdd(roll)) {
+      this.isGettingOutOfPenaltyBox = true;
+
+      console.log(
+        this.players[this.currentPlayer] + " is getting out of the penalty box"
+      );
+
+      this.places[this.currentPlayer] = this.places[this.currentPlayer] + roll;
+      if (this.places[this.currentPlayer] > 11) {
+        this.places[this.currentPlayer] = this.places[this.currentPlayer] - 12;
+      }
+
+      console.log(
+        this.players[this.currentPlayer] +
+          "'s new location is " +
+          this.places[this.currentPlayer]
+      );
+      console.log("The category is " + this.currentCategory());
+      this.askQuestion();
+
+      return;
+    }
     console.log(
       this.players[this.currentPlayer] +
-        "'s new location is " +
-        this.places[this.currentPlayer]
+        " is not getting out of the penalty box"
     );
-    console.log("The category is " + this.currentCategory());
-    this.askQuestion();
+    this.isGettingOutOfPenaltyBox = false;
   }
 
   private askQuestion(): void {
