@@ -66,7 +66,7 @@ export class Game {
   }
 
   private rotatePlayer(roll: number) {
-    this.tiles[this.currentPlayer] = this.tiles[this.currentPlayer] + roll;
+    this.tiles[this.currentPlayer] += roll;
     if (this.tiles[this.currentPlayer] > 11) {
       this.tiles[this.currentPlayer] = this.tiles[this.currentPlayer] - 12;
     }
