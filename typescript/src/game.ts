@@ -130,26 +130,26 @@ export class Game {
 
   public wasCorrectlyAnswered(): boolean {
     if (this.inPenaltyBox[this.currentPlayer]) {
-      if (this.isGettingOutOfPenaltyBox) {
-        console.log("Answer was correct!!!!");
-        this.purses[this.currentPlayer] += 1;
-        console.log(
-          this.players[this.currentPlayer] +
-            " now has " +
-            this.purses[this.currentPlayer] +
-            " Gold Coins."
-        );
-
-        var winner = this.didPlayerWin();
-        this.currentPlayer += 1;
-        if (this.currentPlayer == this.players.length) this.currentPlayer = 0;
-
-        return winner;
-      } else {
+      if (!this.isGettingOutOfPenaltyBox) {
         this.currentPlayer += 1;
         if (this.currentPlayer == this.players.length) this.currentPlayer = 0;
         return true;
       }
+
+      console.log("Answer was correct!!!!");
+      this.purses[this.currentPlayer] += 1;
+      console.log(
+        this.players[this.currentPlayer] +
+          " now has " +
+          this.purses[this.currentPlayer] +
+          " Gold Coins."
+      );
+
+      var winner = this.didPlayerWin();
+      this.currentPlayer += 1;
+      if (this.currentPlayer == this.players.length) this.currentPlayer = 0;
+
+      return winner;
     } else {
       console.log("Answer was corrent!!!!");
 
