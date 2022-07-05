@@ -125,22 +125,7 @@ export class Game {
   }
 
   public wasCorrectlyAnswered(): boolean {
-    if (this.inPenaltyBox[this.currentPlayer]) {
-      if (this.isGettingOutOfPenaltyBox) {
-        console.log("Answer was correct!!!!");
-
-        this.addToPlayerPurse();
-
-        var winner = this.didPlayerWin();
-
-        this.rotatePlayer();
-
-        return winner;
-      } else {
-        this.rotatePlayer();
-        return true;
-      }
-    } else {
+    if (!this.inPenaltyBox[this.currentPlayer]) {
       console.log("Answer was corrent!!!!");
 
       this.addToPlayerPurse();
@@ -151,6 +136,22 @@ export class Game {
 
       return winner;
     }
+
+    if (this.isGettingOutOfPenaltyBox) {
+      console.log("Answer was correct!!!!");
+
+      this.addToPlayerPurse();
+
+      var winner = this.didPlayerWin();
+
+      this.rotatePlayer();
+
+      return winner;
+    }
+
+    this.rotatePlayer();
+
+    return true;
   }
 
   private addToPlayerPurse() {
