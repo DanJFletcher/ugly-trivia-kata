@@ -67,7 +67,7 @@ export class Game {
 
   private rotatePlayer(roll: number) {
     this.tiles[this.currentPlayer] += roll;
-    if (this.tiles[this.currentPlayer] > 11) {
+    if (this.playerIsOnLastTile()) {
       this.tiles[this.currentPlayer] = this.tiles[this.currentPlayer] - 12;
     }
 
@@ -78,6 +78,10 @@ export class Game {
     );
     console.log("The category is " + this.currentCategory());
     this.askQuestion();
+  }
+
+  private playerIsOnLastTile() {
+    return this.tiles[this.currentPlayer] > 11;
   }
 
   private askQuestion(): void {
