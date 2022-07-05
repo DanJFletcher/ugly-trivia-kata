@@ -11,6 +11,10 @@ export class Game {
   private sportsQuestions: Array<string> = [];
   private rockQuestions: Array<string> = [];
 
+  private pop = "Pop";
+  private science = "Science";
+  private sports = "Sports";
+
   constructor() {
     for (let i = 0; i < 50; i++) {
       this.popQuestions.push("Pop Question " + i);
@@ -31,13 +35,21 @@ export class Game {
     this.inPenaltyBox[this.howManyPlayers()] = false;
 
     console.log(name + " was added");
-    console.log("They are player number " + this.players.length);
+    console.log("They are player number " + this.howManyPlayers());
 
     return true;
   }
 
   private howManyPlayers(): number {
     return this.players.length;
+  }
+
+  private getCurrentPlace() {
+    return this.places[this.currentPlayer];
+  }
+
+  private setCurrentPlace(value: number) {
+    this.places[this.currentPlayer] = value;
   }
 
   public roll(roll: number) {
@@ -52,17 +64,15 @@ export class Game {
           this.players[this.currentPlayer] +
             " is getting out of the penalty box"
         );
-        this.places[this.currentPlayer] =
-          this.places[this.currentPlayer] + roll;
-        if (this.places[this.currentPlayer] > 11) {
-          this.places[this.currentPlayer] =
-            this.places[this.currentPlayer] - 12;
+        this.setCurrentPlace(this.getCurrentPlace() + roll);
+        if (this.getCurrentPlace() > 11) {
+          this.setCurrentPlace(this.getCurrentPlace() - 12);
         }
 
         console.log(
           this.players[this.currentPlayer] +
             "'s new location is " +
-            this.places[this.currentPlayer]
+            this.getCurrentPlace()
         );
         console.log("The category is " + this.currentCategory());
         this.askQuestion();
@@ -90,25 +100,26 @@ export class Game {
   }
 
   private askQuestion(): void {
-    if (this.currentCategory() == "Pop") console.log(this.popQuestions.shift());
-    if (this.currentCategory() == "Science")
+    if (this.currentCategory() == this.pop)
+      console.log(this.popQuestions.shift());
+    if (this.currentCategory() == this.science)
       console.log(this.scienceQuestions.shift());
-    if (this.currentCategory() == "Sports")
+    if (this.currentCategory() == this.sports)
       console.log(this.sportsQuestions.shift());
     if (this.currentCategory() == "Rock")
       console.log(this.rockQuestions.shift());
   }
 
   private currentCategory(): string {
-    if (this.places[this.currentPlayer] == 0) return "Pop";
-    if (this.places[this.currentPlayer] == 4) return "Pop";
-    if (this.places[this.currentPlayer] == 8) return "Pop";
-    if (this.places[this.currentPlayer] == 1) return "Science";
-    if (this.places[this.currentPlayer] == 5) return "Science";
-    if (this.places[this.currentPlayer] == 9) return "Science";
-    if (this.places[this.currentPlayer] == 2) return "Sports";
-    if (this.places[this.currentPlayer] == 6) return "Sports";
-    if (this.places[this.currentPlayer] == 10) return "Sports";
+    if (this.places[this.currentPlayer] == 0) return this.pop;
+    if (this.places[this.currentPlayer] == 4) return this.pop;
+    if (this.places[this.currentPlayer] == 8) return this.pop;
+    if (this.places[this.currentPlayer] == 1) return this.science;
+    if (this.places[this.currentPlayer] == 5) return this.science;
+    if (this.places[this.currentPlayer] == 9) return this.science;
+    if (this.places[this.currentPlayer] == 2) return this.sports;
+    if (this.places[this.currentPlayer] == 6) return this.sports;
+    if (this.places[this.currentPlayer] == 10) return this.sports;
     return "Rock";
   }
 
