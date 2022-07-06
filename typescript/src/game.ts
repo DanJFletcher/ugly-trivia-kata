@@ -49,7 +49,6 @@ export class Game {
             " is getting out of the penalty box"
         );
         this.movePlayer(roll);
-        console.log("The category is " + this.currentCategory());
         this.askQuestion();
       } else {
         console.log(
@@ -60,7 +59,6 @@ export class Game {
       }
     } else {
       this.movePlayer(roll);
-      console.log("The category is " + this.currentCategory());
       this.askQuestion();
     }
   }
@@ -79,6 +77,8 @@ export class Game {
   }
 
   private askQuestion(): void {
+    console.log("The category is " + this.currentCategory());
+
     if (this.currentCategory() == "Pop") console.log(this.popQuestions.shift());
     if (this.currentCategory() == "Science")
       console.log(this.scienceQuestions.shift());
