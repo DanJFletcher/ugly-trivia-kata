@@ -152,7 +152,15 @@ export class Game {
     }
 
     console.log("Answer was correct!!!!");
+    this.addGoldToPlayerPurse();
+    var winner = this.didPlayerWin();
 
+    this.rotatePlayer();
+
+    return winner;
+  }
+
+  private addGoldToPlayerPurse() {
     this.purses[this.currentPlayer] += 1;
     console.log(
       this.players[this.currentPlayer] +
@@ -160,12 +168,6 @@ export class Game {
         this.purses[this.currentPlayer] +
         " Gold Coins."
     );
-
-    var winner = this.didPlayerWin();
-
-    this.rotatePlayer();
-
-    return winner;
   }
 }
 
