@@ -1,3 +1,14 @@
+const categoryMap: { [key: number]: string } = {
+  0: "Pop",
+  4: "Pop",
+  8: "Pop",
+  1: "Science",
+  5: "Science",
+  9: "Science",
+  2: "Sports",
+  6: "Sports",
+  10: "Sports",
+};
 export class Game {
   private players: Array<string> = [];
   private tiles: Array<number> = [];
@@ -105,15 +116,10 @@ export class Game {
   }
 
   private currentCategory(): string {
-    if (this.tiles[this.currentPlayer] == 0) return "Pop";
-    if (this.tiles[this.currentPlayer] == 4) return "Pop";
-    if (this.tiles[this.currentPlayer] == 8) return "Pop";
-    if (this.tiles[this.currentPlayer] == 1) return "Science";
-    if (this.tiles[this.currentPlayer] == 5) return "Science";
-    if (this.tiles[this.currentPlayer] == 9) return "Science";
-    if (this.tiles[this.currentPlayer] == 2) return "Sports";
-    if (this.tiles[this.currentPlayer] == 6) return "Sports";
-    if (this.tiles[this.currentPlayer] == 10) return "Sports";
+    const category = categoryMap[this.tiles[this.currentPlayer]];
+
+    if (category) return category;
+
     return "Rock";
   }
 
