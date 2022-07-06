@@ -79,10 +79,10 @@ export class Game {
   }
 
   private movePlayer(roll: number) {
-    this.tiles[this.currentPlayer] = this.tiles[this.currentPlayer] + roll;
+    this.tiles[this.currentPlayer] += roll;
+
     if (this.tiles[this.currentPlayer] >= this.totalTiles) {
-      this.tiles[this.currentPlayer] =
-        this.tiles[this.currentPlayer] - this.totalTiles;
+      this.tiles[this.currentPlayer] -= this.totalTiles;
     }
 
     console.log(
