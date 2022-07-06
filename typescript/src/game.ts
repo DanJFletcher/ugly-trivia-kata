@@ -1,6 +1,6 @@
 export class Game {
   private players: Array<string> = [];
-  private places: Array<number> = [];
+  private tiles: Array<number> = [];
   private purses: Array<number> = [];
   private inPenaltyBox: Array<boolean> = [];
   private currentPlayer: number = 0;
@@ -10,6 +10,8 @@ export class Game {
   private scienceQuestions: Array<string> = [];
   private sportsQuestions: Array<string> = [];
   private rockQuestions: Array<string> = [];
+
+  private readonly totalTiles = 12;
 
   constructor() {
     for (let i = 0; i < 50; i++) {
@@ -22,7 +24,7 @@ export class Game {
 
   public add(name: string): boolean {
     this.players.push(name);
-    this.places[this.totalPlayers()] = 0;
+    this.tiles[this.totalPlayers()] = 0;
     this.purses[this.totalPlayers()] = 0;
     this.inPenaltyBox[this.totalPlayers()] = false;
 
@@ -75,15 +77,16 @@ export class Game {
   }
 
   private movePlayer(roll: number) {
-    this.places[this.currentPlayer] = this.places[this.currentPlayer] + roll;
-    if (this.places[this.currentPlayer] > 11) {
-      this.places[this.currentPlayer] = this.places[this.currentPlayer] - 12;
+    this.tiles[this.currentPlayer] = this.tiles[this.currentPlayer] + roll;
+    if (this.tiles[this.currentPlayer] >= this.totalTiles) {
+      this.tiles[this.currentPlayer] =
+        this.tiles[this.currentPlayer] - this.totalTiles;
     }
 
     console.log(
       this.players[this.currentPlayer] +
         "'s new location is " +
-        this.places[this.currentPlayer]
+        this.tiles[this.currentPlayer]
     );
   }
 
@@ -100,15 +103,15 @@ export class Game {
   }
 
   private currentCategory(): string {
-    if (this.places[this.currentPlayer] == 0) return "Pop";
-    if (this.places[this.currentPlayer] == 4) return "Pop";
-    if (this.places[this.currentPlayer] == 8) return "Pop";
-    if (this.places[this.currentPlayer] == 1) return "Science";
-    if (this.places[this.currentPlayer] == 5) return "Science";
-    if (this.places[this.currentPlayer] == 9) return "Science";
-    if (this.places[this.currentPlayer] == 2) return "Sports";
-    if (this.places[this.currentPlayer] == 6) return "Sports";
-    if (this.places[this.currentPlayer] == 10) return "Sports";
+    if (this.tiles[this.currentPlayer] == 0) return "Pop";
+    if (this.tiles[this.currentPlayer] == 4) return "Pop";
+    if (this.tiles[this.currentPlayer] == 8) return "Pop";
+    if (this.tiles[this.currentPlayer] == 1) return "Science";
+    if (this.tiles[this.currentPlayer] == 5) return "Science";
+    if (this.tiles[this.currentPlayer] == 9) return "Science";
+    if (this.tiles[this.currentPlayer] == 2) return "Sports";
+    if (this.tiles[this.currentPlayer] == 6) return "Sports";
+    if (this.tiles[this.currentPlayer] == 10) return "Sports";
     return "Rock";
   }
 
