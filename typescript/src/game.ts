@@ -27,7 +27,7 @@ export class Game {
     this.inPenaltyBox[this.howManyPlayers()] = false;
 
     console.log(name + " was added");
-    console.log("They are player number " + this.players.length);
+    console.log("They are player number " + this.howManyPlayers());
 
     return true;
   }
