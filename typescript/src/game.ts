@@ -125,9 +125,13 @@ export class Game {
     console.log("Question was incorrectly answered");
     this.sendPlayerToPenaltyBox();
 
+    this.rotatePlayer();
+    return true;
+  }
+
+  private rotatePlayer() {
     this.currentPlayer += 1;
     if (this.currentPlayer == this.players.length) this.currentPlayer = 0;
-    return true;
   }
 
   private sendPlayerToPenaltyBox() {
@@ -150,13 +154,11 @@ export class Game {
         );
 
         var winner = this.didPlayerWin();
-        this.currentPlayer += 1;
-        if (this.currentPlayer == this.players.length) this.currentPlayer = 0;
+        this.rotatePlayer();
 
         return winner;
       } else {
-        this.currentPlayer += 1;
-        if (this.currentPlayer == this.players.length) this.currentPlayer = 0;
+        this.rotatePlayer();
         return true;
       }
     } else {
@@ -172,8 +174,7 @@ export class Game {
 
       var winner = this.didPlayerWin();
 
-      this.currentPlayer += 1;
-      if (this.currentPlayer == this.players.length) this.currentPlayer = 0;
+      this.rotatePlayer();
 
       return winner;
     }
