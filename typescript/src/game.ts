@@ -41,7 +41,7 @@ export class Game {
     console.log("They have rolled a " + roll);
 
     if (this.inPenaltyBox[this.currentPlayer]) {
-      if (roll % 2 != 0) {
+      if (isOdd(roll)) {
         this.isGettingOutOfPenaltyBox = true;
 
         console.log(
@@ -165,4 +165,7 @@ export class Game {
       return winner;
     }
   }
+}
+function isOdd(roll: number) {
+  return roll % 2 != 0;
 }
