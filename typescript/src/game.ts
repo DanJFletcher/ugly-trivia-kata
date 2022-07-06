@@ -22,17 +22,17 @@ export class Game {
 
   public add(name: string): boolean {
     this.players.push(name);
-    this.places[this.howManyPlayers()] = 0;
-    this.purses[this.howManyPlayers()] = 0;
-    this.inPenaltyBox[this.howManyPlayers()] = false;
+    this.places[this.totalPlayers()] = 0;
+    this.purses[this.totalPlayers()] = 0;
+    this.inPenaltyBox[this.totalPlayers()] = false;
 
     console.log(name + " was added");
-    console.log("They are player number " + this.howManyPlayers());
+    console.log("They are player number " + this.totalPlayers());
 
     return true;
   }
 
-  private howManyPlayers(): number {
+  private totalPlayers(): number {
     return this.players.length;
   }
 
