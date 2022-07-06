@@ -13,6 +13,8 @@ export class Game {
 
   private readonly totalTiles = 12;
 
+  private readonly goldNeededToWin = 6;
+
   constructor() {
     for (let i = 0; i < 50; i++) {
       this.popQuestions.push("Pop Question " + i);
@@ -116,7 +118,7 @@ export class Game {
   }
 
   private didPlayerWin(): boolean {
-    return !(this.purses[this.currentPlayer] == 6);
+    return !(this.purses[this.currentPlayer] == this.goldNeededToWin);
   }
 
   public wrongAnswer(): boolean {
