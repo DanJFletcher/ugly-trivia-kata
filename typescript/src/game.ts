@@ -118,7 +118,7 @@ export class Game {
   }
 
   private didPlayerWin(): boolean {
-    return !(this.purses[this.currentPlayer] == this.goldNeededToWin);
+    return this.purses[this.currentPlayer] != this.goldNeededToWin;
   }
 
   public wrongAnswer(): boolean {
