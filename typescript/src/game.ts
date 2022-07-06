@@ -48,18 +48,7 @@ export class Game {
           this.players[this.currentPlayer] +
             " is getting out of the penalty box"
         );
-        this.places[this.currentPlayer] =
-          this.places[this.currentPlayer] + roll;
-        if (this.places[this.currentPlayer] > 11) {
-          this.places[this.currentPlayer] =
-            this.places[this.currentPlayer] - 12;
-        }
-
-        console.log(
-          this.players[this.currentPlayer] +
-            "'s new location is " +
-            this.places[this.currentPlayer]
-        );
+        this.movePlayer(roll);
         console.log("The category is " + this.currentCategory());
         this.askQuestion();
       } else {
@@ -70,19 +59,23 @@ export class Game {
         this.isGettingOutOfPenaltyBox = false;
       }
     } else {
-      this.places[this.currentPlayer] = this.places[this.currentPlayer] + roll;
-      if (this.places[this.currentPlayer] > 11) {
-        this.places[this.currentPlayer] = this.places[this.currentPlayer] - 12;
-      }
-
-      console.log(
-        this.players[this.currentPlayer] +
-          "'s new location is " +
-          this.places[this.currentPlayer]
-      );
+      this.movePlayer(roll);
       console.log("The category is " + this.currentCategory());
       this.askQuestion();
     }
+  }
+
+  private movePlayer(roll: number) {
+    this.places[this.currentPlayer] = this.places[this.currentPlayer] + roll;
+    if (this.places[this.currentPlayer] > 11) {
+      this.places[this.currentPlayer] = this.places[this.currentPlayer] - 12;
+    }
+
+    console.log(
+      this.players[this.currentPlayer] +
+        "'s new location is " +
+        this.places[this.currentPlayer]
+    );
   }
 
   private askQuestion(): void {
