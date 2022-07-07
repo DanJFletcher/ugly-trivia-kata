@@ -1,5 +1,12 @@
 import { Player } from "./player";
 
+interface Settings {
+  totalTiles: number;
+}
+export const settings: Settings = {
+  totalTiles: 12,
+};
+
 const categoryMap: { [key: number]: string } = {
   0: "Pop",
   4: "Pop",
@@ -21,8 +28,6 @@ export class Game {
   private scienceQuestions: Array<string> = [];
   private sportsQuestions: Array<string> = [];
   private rockQuestions: Array<string> = [];
-
-  private readonly totalTiles = 12;
 
   private readonly goldNeededToWin = 6;
 
@@ -54,7 +59,7 @@ export class Game {
     console.log("They have rolled a " + roll);
 
     if (!this.getCurrentPlayer().inPenaltyBox) {
-      this.movePlayer(roll);
+      this.getCurrentPlayer().move(roll);
       this.askQuestion();
 
       return;
@@ -62,7 +67,7 @@ export class Game {
 
     if (isOdd(roll)) {
       this.leavePenaltyBox();
-      this.movePlayer(roll);
+      this.getCurrentPlayer().move(roll);
       this.askQuestion();
 
       return;
@@ -83,20 +88,6 @@ export class Game {
 
     console.log(
       this.getCurrentPlayer().name + " is getting out of the penalty box"
-    );
-  }
-
-  private movePlayer(roll: number) {
-    this.getCurrentPlayer().tile += roll;
-
-    if (this.getCurrentPlayer().tile >= this.totalTiles) {
-      this.getCurrentPlayer().tile -= this.totalTiles;
-    }
-
-    console.log(
-      this.getCurrentPlayer().name +
-        "'s new location is " +
-        this.getCurrentPlayer().tile
     );
   }
 
