@@ -1,3 +1,5 @@
+import { Player } from "./player";
+
 const categoryMap: { [key: number]: string } = {
   0: "Pop",
   4: "Pop",
@@ -10,7 +12,7 @@ const categoryMap: { [key: number]: string } = {
   10: "Sports",
 };
 export class Game {
-  private players: Array<string> = [];
+  private players: Array<Player> = [];
   private tiles: Array<number> = [];
   private purses: Array<number> = [];
   private inPenaltyBox: Array<boolean> = [];
@@ -36,7 +38,9 @@ export class Game {
   }
 
   public add(name: string): boolean {
-    this.players.push(name);
+    const player = new Player(name);
+    this.players.push(player);
+
     this.tiles[this.totalPlayers()] = 0;
     this.purses[this.totalPlayers()] = 0;
     this.inPenaltyBox[this.totalPlayers()] = false;
@@ -52,7 +56,7 @@ export class Game {
   }
 
   public roll(roll: number) {
-    console.log(this.players[this.currentPlayer] + " is the current player");
+    console.log(this.getCurrentPlayer().name + " is the current player");
     console.log("They have rolled a " + roll);
 
     if (!this.inPenaltyBox[this.currentPlayer]) {
@@ -75,8 +79,7 @@ export class Game {
 
   private keepPlayerInPenaltyBox() {
     console.log(
-      this.players[this.currentPlayer] +
-        " is not getting out of the penalty box"
+      this.getCurrentPlayer().name + " is not getting out of the penalty box"
     );
     this.isGettingOutOfPenaltyBox = false;
   }
@@ -85,7 +88,7 @@ export class Game {
     this.isGettingOutOfPenaltyBox = true;
 
     console.log(
-      this.players[this.currentPlayer] + " is getting out of the penalty box"
+      this.getCurrentPlayer().name + " is getting out of the penalty box"
     );
   }
 
@@ -97,10 +100,14 @@ export class Game {
     }
 
     console.log(
-      this.players[this.currentPlayer] +
+      this.getCurrentPlayer().name +
         "'s new location is " +
         this.tiles[this.currentPlayer]
     );
+  }
+
+  private getCurrentPlayer() {
+    return this.players[this.currentPlayer];
   }
 
   private askQuestion(): void {
@@ -141,9 +148,7 @@ export class Game {
   }
 
   private sendPlayerToPenaltyBox() {
-    console.log(
-      this.players[this.currentPlayer] + " was sent to the penalty box"
-    );
+    console.log(this.getCurrentPlayer().name + " was sent to the penalty box");
     this.inPenaltyBox[this.currentPlayer] = true;
   }
 
@@ -169,7 +174,7 @@ export class Game {
   private addGoldToPlayerPurse() {
     this.purses[this.currentPlayer] += 1;
     console.log(
-      this.players[this.currentPlayer] +
+      this.getCurrentPlayer().name +
         " now has " +
         this.purses[this.currentPlayer] +
         " Gold Coins."
