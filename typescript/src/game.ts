@@ -13,7 +13,6 @@ const categoryMap: { [key: number]: string } = {
 };
 export class Game {
   private players: Array<Player> = [];
-  private tiles: Array<number> = [];
   private purses: Array<number> = [];
   private inPenaltyBox: Array<boolean> = [];
   private currentPlayer: number = 0;
@@ -41,7 +40,6 @@ export class Game {
     const player = new Player(name);
     this.players.push(player);
 
-    this.tiles[this.totalPlayers()] = 0;
     this.purses[this.totalPlayers()] = 0;
     this.inPenaltyBox[this.totalPlayers()] = false;
 
