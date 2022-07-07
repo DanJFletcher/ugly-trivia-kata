@@ -93,16 +93,16 @@ export class Game {
   }
 
   private movePlayer(roll: number) {
-    this.tiles[this.currentPlayer] += roll;
+    this.getCurrentPlayer().tile += roll;
 
-    if (this.tiles[this.currentPlayer] >= this.totalTiles) {
-      this.tiles[this.currentPlayer] -= this.totalTiles;
+    if (this.getCurrentPlayer().tile >= this.totalTiles) {
+      this.getCurrentPlayer().tile -= this.totalTiles;
     }
 
     console.log(
       this.getCurrentPlayer().name +
         "'s new location is " +
-        this.tiles[this.currentPlayer]
+        this.getCurrentPlayer().tile
     );
   }
 
@@ -123,7 +123,7 @@ export class Game {
   }
 
   private currentCategory(): string {
-    const category = categoryMap[this.tiles[this.currentPlayer]];
+    const category = categoryMap[this.getCurrentPlayer().tile];
 
     if (category) return category;
 
