@@ -5,7 +5,9 @@
   "main": "src/game-runner.ts",
   "scripts": {
     "start": "ts-node src/game-runner.ts",
-    "test": "nyc mocha --recursive --require ts-node/register \"tests/**/*.test.ts\""
+    "test": "mocha --recursive --require ts-node/register \"tests/**/*.test.ts\"",
+    "test:watch": "mocha --recursive --require ts-node/register \"tests/**/*.test.ts\" --watch --watch-files \"src/**/*.ts\"",
+    "test:coverage": "nyc mocha --recursive --require ts-node/register \"tests/**/*.test.ts\""
   },
   "nyc": {
     "include": [
