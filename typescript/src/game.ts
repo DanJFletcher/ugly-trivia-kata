@@ -14,7 +14,6 @@ const categoryMap: { [key: number]: string } = {
 export class Game {
   private players: Array<Player> = [];
 
-  private inPenaltyBox: Array<boolean> = [];
   private currentPlayer: number = 0;
   private isGettingOutOfPenaltyBox: boolean = false;
 
@@ -40,8 +39,6 @@ export class Game {
     const player = new Player(name);
     this.players.push(player);
 
-    this.inPenaltyBox[this.totalPlayers()] = false;
-
     console.log(name + " was added");
     console.log("They are player number " + this.totalPlayers());
 
@@ -56,7 +53,7 @@ export class Game {
     console.log(this.getCurrentPlayer().name + " is the current player");
     console.log("They have rolled a " + roll);
 
-    if (!this.inPenaltyBox[this.currentPlayer]) {
+    if (!this.getCurrentPlayer().inPenaltyBox) {
       this.movePlayer(roll);
       this.askQuestion();
 
@@ -146,12 +143,12 @@ export class Game {
 
   private sendPlayerToPenaltyBox() {
     console.log(this.getCurrentPlayer().name + " was sent to the penalty box");
-    this.inPenaltyBox[this.currentPlayer] = true;
+    this.getCurrentPlayer().inPenaltyBox = true;
   }
 
   public wasCorrectlyAnswered(): boolean {
     if (
-      this.inPenaltyBox[this.currentPlayer] &&
+      this.getCurrentPlayer().inPenaltyBox &&
       !this.isGettingOutOfPenaltyBox
     ) {
       this.rotatePlayer();
