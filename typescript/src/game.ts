@@ -13,7 +13,7 @@ const categoryMap: { [key: number]: string } = {
 };
 export class Game {
   private players: Array<Player> = [];
-  private purses: Array<number> = [];
+
   private inPenaltyBox: Array<boolean> = [];
   private currentPlayer: number = 0;
   private isGettingOutOfPenaltyBox: boolean = false;
@@ -40,7 +40,6 @@ export class Game {
     const player = new Player(name);
     this.players.push(player);
 
-    this.purses[this.totalPlayers()] = 0;
     this.inPenaltyBox[this.totalPlayers()] = false;
 
     console.log(name + " was added");
@@ -129,7 +128,7 @@ export class Game {
   }
 
   private didPlayerWin(): boolean {
-    return this.purses[this.currentPlayer] != this.goldNeededToWin;
+    return this.getCurrentPlayer().purse != this.goldNeededToWin;
   }
 
   public wrongAnswer(): boolean {
@@ -170,11 +169,11 @@ export class Game {
   }
 
   private addGoldToPlayerPurse() {
-    this.purses[this.currentPlayer] += 1;
+    this.getCurrentPlayer().purse += 1;
     console.log(
       this.getCurrentPlayer().name +
         " now has " +
-        this.purses[this.currentPlayer] +
+        this.getCurrentPlayer().purse +
         " Gold Coins."
     );
   }
