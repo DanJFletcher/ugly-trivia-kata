@@ -5,9 +5,8 @@
   "main": "src/game-runner.ts",
   "scripts": {
     "start": "ts-node src/game-runner.ts",
-    "test": "mocha --recursive --require ts-node/register \"tests/**/*.test.ts\"",
-    "test:watch": "mocha --recursive --require ts-node/register \"tests/**/*.test.ts\" --watch --watch-files \"src/**/*.ts\"",
-    "test:coverage": "nyc mocha --recursive --require ts-node/register \"tests/**/*.test.ts\""
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch"
   },
   "nyc": {
     "include": [
@@ -32,16 +31,13 @@
   "author": "Felix Blechschmitt",
   "license": "GPL-3.0",
   "dependencies": {
-    "typescript": "^2.9.2"
+    "typescript": "^4.7.4"
   },
   "devDependencies": {
-    "@types/chai": "^4.3.1",
-    "@types/mocha": "^9.1.1",
-    "chai": "^4.3.6",
-    "mocha": "^10.0.0",
-    "mocha-chai-jest-snapshot": "^1.1.4",
+    "@types/jest": "^28.1.4",
+    "jest": "^28.1.2",
     "nyc": "^15.1.0",
-    "sinon": "^6.3.5",
+    "ts-jest": "^28.0.5",
     "ts-node": "^10.8.2"
   }
 }
