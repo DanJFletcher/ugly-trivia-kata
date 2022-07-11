@@ -27,7 +27,7 @@ export class Game {
     this.inPenaltyBox[this.howManyPlayers()] = false;
 
     console.log(name + " was added");
-    console.log("They are player number " + this.players.length);
+    console.log("They are player number " + this.howManyPlayers());
 
     return true;
   }
@@ -94,7 +94,8 @@ export class Game {
   private askQuestion(): void {
     console.log("The category is " + this.currentCategory());
 
-    if (this.currentCategory() == "Pop") console.log(this.popQuestions.shift());
+    if (this.currentCategory() == "Pop")
+      console.log(this.popQuestions.shift());
     if (this.currentCategory() == "Science")
       console.log(this.scienceQuestions.shift());
     if (this.currentCategory() == "Sports")
@@ -115,15 +116,15 @@ export class Game {
   ];
 
   private currentCategory(): string {
-    if (this.places[this.currentPlayer] == 0) return "Pop";
-    if (this.places[this.currentPlayer] == 4) return "Pop";
-    if (this.places[this.currentPlayer] == 8) return "Pop";
-    if (this.places[this.currentPlayer] == 1) return "Science";
-    if (this.places[this.currentPlayer] == 5) return "Science";
-    if (this.places[this.currentPlayer] == 9) return "Science";
-    if (this.places[this.currentPlayer] == 2) return "Sports";
-    if (this.places[this.currentPlayer] == 6) return "Sports";
-    if (this.places[this.currentPlayer] == 10) return "Sports";
+    if (this.getCurrentPlayerPlace() == 0) return "Pop";
+    if (this.getCurrentPlayerPlace() == 4) return "Pop";
+    if (this.getCurrentPlayerPlace() == 8) return "Pop";
+    if (this.getCurrentPlayerPlace() == 1) return "Science";
+    if (this.getCurrentPlayerPlace() == 5) return "Science";
+    if (this.getCurrentPlayerPlace() == 9) return "Science";
+    if (this.getCurrentPlayerPlace() == 2) return "Sports";
+    if (this.getCurrentPlayerPlace() == 6) return "Sports";
+    if (this.getCurrentPlayerPlace() == 10) return "Sports";
     return "Rock";
   }
 
@@ -157,12 +158,20 @@ export class Game {
 
         var winner = this.didPlayerWin();
         this.currentPlayer += 1;
-        if (this.currentPlayer == this.players.length) this.currentPlayer = 0;
 
+        if (this.currentPlayer == this.players.length)
+        {
+          this.currentPlayer = 0;
+        }
+          
         return winner;
       } else {
         this.currentPlayer += 1;
-        if (this.currentPlayer == this.players.length) this.currentPlayer = 0;
+
+        if (this.currentPlayer == this.players.length) {
+          this.currentPlayer = 0;
+        }
+          
         return true;
       }
     } else {
@@ -179,7 +188,10 @@ export class Game {
       var winner = this.didPlayerWin();
 
       this.currentPlayer += 1;
-      if (this.currentPlayer == this.players.length) this.currentPlayer = 0;
+      
+      if (this.currentPlayer == this.players.length) {
+        this.currentPlayer = 0;
+      }
 
       return winner;
     }
