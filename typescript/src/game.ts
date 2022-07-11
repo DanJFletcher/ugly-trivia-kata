@@ -40,49 +40,43 @@ export class Game {
     console.log(this.players[this.currentPlayer] + " is the current player");
     console.log("They have rolled a " + roll);
 
-    if (this.inPenaltyBox[this.currentPlayer]) {
-      if (roll % 2 != 0) {
-        this.isGettingOutOfPenaltyBox = true;
+    if (!this.inPenaltyBox[this.currentPlayer]) {
+      this.movePlayer(roll);
 
-        console.log(
-          this.players[this.currentPlayer] +
-            " is getting out of the penalty box"
-        );
-        this.places[this.currentPlayer] =
-          this.places[this.currentPlayer] + roll;
-        if (this.getCurrentPlayerPlace() > 11) {
-          this.places[this.currentPlayer] =
-            this.places[this.currentPlayer] - 12;
-        }
-
-        console.log(
-          this.players[this.currentPlayer] +
-            "'s new location is " +
-            this.getCurrentPlayerPlace()
-        );
-        console.log("The category is " + this.currentCategory());
-        this.askQuestion();
-      } else {
-        console.log(
-          this.players[this.currentPlayer] +
-            " is not getting out of the penalty box"
-        );
-        this.isGettingOutOfPenaltyBox = false;
-      }
-    } else {
-      this.setCurrentPlayerPlace(this.getCurrentPlayerPlace() + roll);
-      if (this.getCurrentPlayerPlace() > 11) {
-        this.setCurrentPlayerPlace(this.getCurrentPlayerPlace() - 12);
-      }
+      console.log("The category is " + this.currentCategory());
+      this.askQuestion();
+      return;
+    }
+    if (isOdd(roll)) {
+      this.isGettingOutOfPenaltyBox = true;
 
       console.log(
         this.players[this.currentPlayer] +
-          "'s new location is " +
-          this.getCurrentPlayerPlace()
+          " is getting out of the penalty box"
       );
+      this.movePlayer(roll);
       console.log("The category is " + this.currentCategory());
       this.askQuestion();
+      return;
     }
+    console.log(
+      this.players[this.currentPlayer] +
+        " is not getting out of the penalty box"
+    );
+    this.isGettingOutOfPenaltyBox = false;
+  }
+
+  private movePlayer(roll: number) {
+    this.setCurrentPlayerPlace(this.getCurrentPlayerPlace() + roll);
+    if (this.getCurrentPlayerPlace() > 11) {
+      this.setCurrentPlayerPlace(this.getCurrentPlayerPlace() - 12);
+    }
+
+    console.log(
+      this.players[this.currentPlayer] +
+      "'s new location is " +
+      this.getCurrentPlayerPlace()
+    );
   }
 
   private getCurrentPlayerPlace()
@@ -187,3 +181,7 @@ export class Game {
     }
   }
 }
+function isOdd(roll: number) {
+  return roll % 2 != 0;
+}
+
