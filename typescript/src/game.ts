@@ -54,7 +54,7 @@ export class Game {
         );
         this.places[this.currentPlayer] =
           this.places[this.currentPlayer] + roll;
-        if (this.places[this.currentPlayer] > 11) {
+        if (this.getCurrentPlayerPlace() > 11) {
           this.places[this.currentPlayer] =
             this.places[this.currentPlayer] - 12;
         }
@@ -62,7 +62,7 @@ export class Game {
         console.log(
           this.players[this.currentPlayer] +
             "'s new location is " +
-            this.places[this.currentPlayer]
+            this.getCurrentPlayerPlace()
         );
         console.log("The category is " + this.currentCategory());
         this.askQuestion();
@@ -74,19 +74,29 @@ export class Game {
         this.isGettingOutOfPenaltyBox = false;
       }
     } else {
-      this.places[this.currentPlayer] = this.places[this.currentPlayer] + roll;
-      if (this.places[this.currentPlayer] > 11) {
-        this.places[this.currentPlayer] = this.places[this.currentPlayer] - 12;
+      this.setCurrentPlayerPlace(this.getCurrentPlayerPlace() + roll);
+      if (this.getCurrentPlayerPlace() > 11) {
+        this.setCurrentPlayerPlace(this.getCurrentPlayerPlace() - 12);
       }
 
       console.log(
         this.players[this.currentPlayer] +
           "'s new location is " +
-          this.places[this.currentPlayer]
+          this.getCurrentPlayerPlace()
       );
       console.log("The category is " + this.currentCategory());
       this.askQuestion();
     }
+  }
+
+  private getCurrentPlayerPlace()
+  {
+    return this.places[this.currentPlayer];
+  }
+
+  private setCurrentPlayerPlace(value: number): void
+  {
+    this.places[this.currentPlayer] = value;
   }
 
   private askQuestion(): void {
@@ -98,6 +108,17 @@ export class Game {
     if (this.currentCategory() == "Rock")
       console.log(this.rockQuestions.shift());
   }
+  
+  private categories = [
+    "Pop",
+    "Science",
+    "Sports",
+    "Rock"
+  ];
+
+  private placesOfCategories = [
+    0, 1, 2, 0
+  ];
 
   private currentCategory(): string {
     if (this.places[this.currentPlayer] == 0) return "Pop";
