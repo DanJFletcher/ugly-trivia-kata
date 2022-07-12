@@ -65,6 +65,7 @@ export class Game {
       this.players[this.currentPlayer] +
         " is not getting out of the penalty box"
     );
+    
     this.isGettingOutOfPenaltyBox = false;
   }
 
@@ -147,52 +148,44 @@ export class Game {
   public wasCorrectlyAnswered(): boolean {
     if (this.inPenaltyBox[this.currentPlayer]) {
       if (this.isGettingOutOfPenaltyBox) {
-        console.log("Answer was correct!!!!");
-        this.purses[this.currentPlayer] += 1;
-        console.log(
-          this.players[this.currentPlayer] +
-            " now has " +
-            this.purses[this.currentPlayer] +
-            " Gold Coins."
-        );
+        this.awardPlayer();
 
         var winner = this.didPlayerWin();
-        this.currentPlayer += 1;
-
-        if (this.currentPlayer == this.players.length)
-        {
-          this.currentPlayer = 0;
-        }
+        this.rotatePlayer();
           
         return winner;
       }
-      this.currentPlayer += 1;
-
-      if (this.currentPlayer == this.players.length) {
-        this.currentPlayer = 0;
-      }
+      this.rotatePlayer();
 
       return true;
     }
-    console.log("Answer was corrent!!!!");
 
-    this.purses[this.currentPlayer] += 1;
-    console.log(
-      this.players[this.currentPlayer] +
-        " now has " +
-        this.purses[this.currentPlayer] +
-        " Gold Coins."
-    );
+    this.awardPlayer();
 
     var winner = this.didPlayerWin();
 
+    this.rotatePlayer();
+
+    return winner;
+  }
+
+  private rotatePlayer() {
     this.currentPlayer += 1;
 
     if (this.currentPlayer == this.players.length) {
       this.currentPlayer = 0;
     }
+  }
 
-    return winner;
+  private awardPlayer() {
+    console.log("Answer was correct!!!!");
+    this.purses[this.currentPlayer] += 1;
+    console.log(
+      this.players[this.currentPlayer] +
+      " now has " +
+      this.purses[this.currentPlayer] +
+      " Gold Coins."
+    );
   }
 }
 function isOdd(roll: number) {
