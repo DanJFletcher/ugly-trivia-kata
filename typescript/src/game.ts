@@ -28,7 +28,7 @@ export class Game {
 
     this.players.push(player);
 
-    console.log(name + " was added");
+    console.log(player.name + " was added");
     console.log("They are player number " + this.totalPlayers());
 
     return true;
