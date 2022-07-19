@@ -1,0 +1,21 @@
+{
+    "name": "vscode/php",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dan Fletcher",
+            "email": "dan.fletcher@humi.ca"
+        }
+    ],
+    "require-dev": {
+        "spatie/phpunit-snapshot-assertions": "^4.2"
+    },
+    "require": {
+        "phpunit/php-code-coverage": "^9.2"
+    }
+}

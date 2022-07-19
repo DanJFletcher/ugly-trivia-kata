@@ -1,4 +1,7 @@
 <?php
+
+namespace App;
+
 function echoln($string) {
   echo $string."\n";
 }
